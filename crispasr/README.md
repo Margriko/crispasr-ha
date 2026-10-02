@@ -9,18 +9,17 @@ speech-to-text and text-to-speech service for Home Assistant Assist.
    repository as an app source:
    `https://github.com/CrispStrobe/crispasr-ha`.
 2. Install **CrispASR**. This app currently supports `amd64` hosts.
-3. Download the model yourself and copy it to the Home Assistant share folder.
-   The default app setting expects:
-   `/share/kmynas-pipiras-q8_0.gguf`.
-
-   For example, use
-   [`kmynas-pipiras-q8_0.gguf`](https://huggingface.co/DeimantasLT/kmynas-pipiras-gguf/tree/main)
-   from DeimantasLT/kmynas-pipiras-gguf.
+3. Copy a CrispASR-compatible GGUF model to the Home Assistant share folder.
+   The default app setting expects `/share/models/model.gguf`. The app does
+   not download models, so the configured path must exactly match the file in
+   `/share`.
 4. Set **Model** to the complete in-container `/share/...` path if the file has
-   a different name or location. Set **Backend** only when automatic GGUF
-   detection needs to be overridden.
-5. Start the app and add it in Home Assistant's **Wyoming Protocol**
-   integration with `tcp://<home-assistant-host>:10300`.
+   a different name or location. Leave **Backend** empty unless the selected
+   model requires an explicit CrispASR backend. Set **Language** to the model's
+   language code or `auto` when supported.
+5. Start the app and wait until the log shows that the backend has loaded and
+   Wyoming is listening. Then add it in Home Assistant's **Wyoming Protocol**
+   integration using host `127.0.0.1` and port `10300`.
 
 The Home Assistant Supervisor builds this thin app image from the source repository and
 uses the upstream `ghcr.io/crispstrobe/crispasr:main` image as its base. The app does
@@ -31,9 +30,9 @@ so the selected model remains managed by you.
 
 | Option | Default | Meaning |
 | --- | --- | --- |
-| `model` | `/share/kmynas-pipiras-q8_0.gguf` | Absolute path to a readable GGUF model in the Home Assistant container. |
-| `backend` | empty | Optional CrispASR backend override. Normally leave empty for GGUF auto-detection. |
-| `language` | `lt` | ISO 639-1 transcription language, or `auto` for language detection. |
+| `model` | `/share/models/model.gguf` | Absolute path to a readable CrispASR-compatible GGUF model in the Home Assistant container. |
+| `backend` | empty | Optional CrispASR backend override. Leave empty when the model is detected automatically. |
+| `language` | `lt` | ISO 639-1 transcription language, or `auto` when the selected model supports language detection. |
 | `threads` | `4` | Number of CPU threads for CrispASR. |
 
 ## Network behavior
