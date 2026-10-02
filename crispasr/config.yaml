@@ -10,7 +10,7 @@ init: false
 map:
   - share:ro
 options:
-  model: /share/kmynas-pipiras-q8_0.gguf
+  model: /share/models/model.gguf
   backend: ""
   language: lt
   threads: 4

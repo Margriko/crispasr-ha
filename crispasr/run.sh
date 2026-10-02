@@ -42,7 +42,7 @@ if [[ -n "$backend" ]]; then
 fi
 
 log "Starting CrispASR with model '$model', language '$language', and $threads thread(s)."
-log "Wyoming is available on tcp://0.0.0.0:$WYOMING_PORT."
+log "Starting Wyoming on tcp://0.0.0.0:$WYOMING_PORT."
 
 # The upstream entrypoint validates the model and execs the CrispASR server.
 # CRISPASR_EXTRA_ARGS appends --wyoming-port to that server command.
