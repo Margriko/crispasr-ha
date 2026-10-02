@@ -11,7 +11,8 @@ RUN apt-get update \
 COPY run.sh /usr/local/bin/crispasr-ha
 RUN chmod 0755 /usr/local/bin/crispasr-ha
 
-USER crispasr
+# Home Assistant writes /data/options.json as root. Keep the app entrypoint
+# running as root so it can read the Supervisor-provided configuration.
 
 EXPOSE 10300/tcp
 
