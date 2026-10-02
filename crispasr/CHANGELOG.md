@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1
+
+- Run the app entrypoint as root so it can read Home Assistant's
+  Supervisor-provided `/data/options.json` configuration file.
+
 ## 0.1.0
 
 - Initial Home Assistant app for the CrispASR upstream container.

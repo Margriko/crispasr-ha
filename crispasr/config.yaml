@@ -1,6 +1,6 @@
 # https://developers.home-assistant.io/docs/apps/configuration/
 name: CrispASR
-version: "0.1.0"
+version: "0.1.1"
 slug: crispasr
 description: Local speech-to-text and text-to-speech through the Wyoming protocol
 url: https://github.com/CrispStrobe/crispasr-ha
