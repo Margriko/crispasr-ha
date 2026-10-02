@@ -1,12 +1,15 @@
 # https://developers.home-assistant.io/docs/apps/configuration/
-name: CrispASR
+name: CrispASR (Moore Threads MUSA)
 version: "0.2.0"
-slug: crispasr
-description: Local speech-to-text and text-to-speech through the Wyoming protocol
+slug: crispasr-musa
+description: Moore Threads MUSA GPU acceleration
 url: https://github.com/CrispStrobe/crispasr-ha
 arch:
   - amd64
 init: false
+# GPU containers need host device access. This exposes the selected host GPU to
+# the app; install this variant only on a host with a Moore Threads GPU with the matching MUSA host driver.
+full_access: true
 map:
   - share:ro
 options:
@@ -14,11 +17,13 @@ options:
   backend: ""
   language: lt
   threads: 4
+  gpu_device: 0
 schema:
   model: str
   backend: str?
   language: str
   threads: int(1,)
+  gpu_device: int(0,)
 ports:
   "10300/tcp": 10300
 ports_description:
